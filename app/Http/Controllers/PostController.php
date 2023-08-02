@@ -30,7 +30,7 @@ class PostController extends Controller
         // Read all
         return collect([
             "message" => "Retrieved all posts."
-        ])->merge(Post::paginate(10)->through(fn ($post) => [
+        ])->merge(Post::orderBy('created_at', 'desc')->paginate(10)->through(fn ($post) => [
             "id" => $post->id,
             "title" => $post->title,
             "body" => substr($post->body, 0, 65) . " ...",
